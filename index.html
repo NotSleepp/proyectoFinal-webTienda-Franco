@@ -29,7 +29,6 @@
                       Perfil
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="./pages/edicionProductos.html">Editar Productos</a></li>
                       <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
                       <li><a class="dropdown-item" href="#">Configuracion</a></li>
                       <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
@@ -76,16 +75,7 @@
        <section>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              <a id="todo" class="nav-link" aria-current="page" href="#"> Mostrar Todo</a>
             </li>
           </ul>
        </section>
@@ -94,15 +84,31 @@
           <div id="productos" class="productos__container"></div>
        </section>
 
-       <section>
-        <div>
-            
-        </div>
-       </section>
 
-       
-
+       <div class="m-4 d-flex flex-column">
+        <h1 class="display-6">Ingrese los datos de la prenda a agregar:</h1>
+        <form action="" class="d-flex flex-column mt-3">
+          <div>
+            <label class="alinear-imputs" for="tituloPrenda">Titulo:</label>
+            <input id="tituloPrenda" class="ingreso__producto" type="text">
+          </div>
+          <div>
+            <label class="alinear-imputs" for="descripcionPrenda">Descripción:</label>
+            <textarea name="descripcionPrendaAgregar" id="descripcionPrenda" cols="5" rows="5"></textarea>
+          </div>
+          <div>
+            <label class="alinear-imputs" for="precioPrenda">Precio:</label>
+            <input id="precioPrenda" class="ingreso__producto" type="text">
+          </div>
+            <button id="continuarEdicionPrenda" type="button" class="btn btn-100px btn-primary m-4">Continuar</button>
+        </form>
+        
+        
+      </div>
       </main>
+      
+
+      
 
       <footer>
         <div>

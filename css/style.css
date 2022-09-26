@@ -3,3 +3,20 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
+.ingreso__producto{
+    margin: 8px;
+    width: 20rem;
+}
+
+.btn-100px{
+    width: 100px;
+}
+
+.alinear-imputs{
+    width: 100px;
+}
+
+#descripcionPrenda{
+    width: 20rem;
+    margin-left: 7.5px;
+}
