@@ -24,12 +24,7 @@ if(localStorage.getItem("stock")){
 localStorage.setItem("stock", JSON.stringify(stock));
 }
 
-
-let todo = document.getElementById("todo");
-todo.addEventListener("click", ()=>{
-    todo.className += " active";
-    agregarProd(stock)
-})
+setTimeout(()=>{agregarProd(stock)},1000)
 
 let producosStock = document.getElementById("productos");
 function agregarProd(array){
@@ -67,13 +62,6 @@ function agregarProd(array){
         });
     })}
 
-    /*let btnAgregarCarrito = document.getElementsByClassName("agregarCarrito");
-    for(let compra of btnAgregarCarrito){
-        compra.addEventListener("click", ()=>{
-            alert("Peoducto Agregado al carrito")
-        })
-    }
-    }*/
 
     function agregarAlCarrito(ropa){
         prodctosAComprar.push(ropa);
@@ -177,6 +165,39 @@ function sumaDeCompra(array){
     
 }
 
+
+finalizarCompra.addEventListener("click", ()=>{
+    terminarCompra()
+})
+
+function terminarCompra(){
+    Swal.fire({
+        title: '¿Desea comprar todo el carrito?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#000',
+        cancelButtonColor: 'grey',
+      }).then((resultado)=>{
+        if(resultado.isConfirmed && prodctosAComprar.length < 1){
+            Swal.fire({
+                toast: true,
+                title: 'No tiene productos en el carrito',
+                icon: 'error',
+              })
+        } if(resultado.isConfirmed && prodctosAComprar.length > 0){
+            Swal.fire({
+                toast: true,
+                title: 'Carrito Comprado',
+                icon: 'success',
+              })
+              prodctosAComprar = [];
+              localStorage.removeItem("carrito");
+        }
+      })
+    
+}
 
 btnshop.addEventListener("click", ()=>{
     agregarPrendasEnCarrito(prodctosAComprar)
