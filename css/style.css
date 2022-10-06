@@ -5,18 +5,47 @@
 
 .ingreso__producto{
     margin: 8px;
-    width: 20rem;
+    width: 18.5rem;
 }
 
-.btn-100px{
-    width: 100px;
-}
 
 .alinear-imputs{
     width: 100px;
 }
 
 #descripcionPrenda{
-    width: 20rem;
+    width: 18.5rem;
     margin-left: 7.5px;
+}
+.imagen_header{
+    height: 35rem; 
+    object-fit: cover; 
+    object-position: center center;
+}
+
+.nbcolor{
+    background-color: black;
+}
+
+.colorTxt{
+    color: #ffffff;
+}
+
+.btn_carrito{
+    
+    background: transparent;
+    color: #000;
+    font-size: 25px;
+    margin: 1rem 0 1rem 1rem;
+    border: none;
+}
+
+.ml-3{
+    margin-left: 2rem;
+}
+
+
+.justify{
+    justify-content: center;
+    align-items: center;
 }
