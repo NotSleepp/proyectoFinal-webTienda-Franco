@@ -130,9 +130,8 @@ continuarEdicionPrenda.addEventListener("click", ()=>{
     if(tituloDePrendavalor.value == ""|| descripcionDePrendavalor.value == ""||precioDePrendavalor.value == ""){
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href="">Why do I have this issue?</a>'
+            title: 'No ingreso bien el producto',
+            text: 'Vuelva a intentarlo por favor',
           })
     }else{
     agregarRopa(stock)
