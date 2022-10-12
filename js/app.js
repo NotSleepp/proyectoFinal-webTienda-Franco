@@ -242,14 +242,16 @@ const filtracion = ()=> {
             <h4 class="card-title">${ropa.titulo}</h4>
             <p class="card-text">${ropa.descripcion}</p>
             <p class="">Precio: ${ropa.precio} </p>
-            <a id="agregarbtn${ropa.id}" href="#" class="btn btn-dark agregarCarrito">Agregar al carrito</a>
+            <a id="agregarbuscadobtn${ropa.id}" href="#" class="btn btn-dark agregarCarrito">Agregar al carrito</a>
             </div>
-</div>` 
+</div>`;
+
         }
     }
     if(paraElBuscador.innerHTML === ''){
         paraElBuscador.innerHTML += `<p class="display-5 ">producto no encontrado</p>` 
     }
+    
 }
 
 btnBuscador.addEventListener("click", ()=>{
@@ -257,3 +259,4 @@ btnBuscador.addEventListener("click", ()=>{
 })
 
 buscador.addEventListener("keyup", filtracion)
+
