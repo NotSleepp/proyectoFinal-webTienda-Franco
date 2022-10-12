@@ -38,8 +38,8 @@
 
                 </ul>
                 <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-dark " type="submit">Buscar</button>
+                  <input id="buscador" class="form-control me-2" type="text" placeholder="Buscar..." aria-label="Search">
+                  <a id="btnBuscar" class="btn btn-dark ">Buscar</a>
                 </form>
                 <button id="btnshop" type="button" class="btn btn_carrito btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <i class="fa-solid fa-cart-shopping"></i>
@@ -107,6 +107,8 @@
         </div>
        </section>
 
+
+
        <section class="d-flex">
         <div style="width: 18rem;">
         <div class="card-body d-flex align-items-center justify-content-center" style="border: solid 1px black; border-radius: 8px;">
@@ -121,10 +123,6 @@
       </div>
        </section>
         
-      
-       
-        
-
        <section class="m-5">
           <div id="productos" class="productos__container"></div>
        </section>
@@ -148,11 +146,17 @@
         </div>
       </div>
 
-
+      <section class="m-5">
+        <div  id="paraElBuscador" class="productos__container">
+        
+      </div>
+      </section>
+      
 
       </main>
 
       
+
       <footer>
         <div>
 

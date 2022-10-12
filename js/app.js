@@ -12,19 +12,15 @@ class Ropa {
     }
 
 }
-
+/*
 const ropa1 = new Ropa(1,"Remera", "remera blanca de la marca adidas", "250", "./img/default.png");
 const ropa2 = new Ropa(2,"Remera Negra", "remera negra de la marca nike para deporte", "1000", "./img/default.png");
 const ropa3 = new Ropa(3,"Pantalon", "pantalon jean de clor negro", "8000", "./img/default.png");
 const ropa4 = new Ropa(4,"buzo", "buzo de clor negro", "15000", "./img/default.png");
+*/
 
-if(localStorage.getItem("stock")){
-    stock = JSON.parse(localStorage.getItem("stock"));
-}else{stock.push(ropa1,ropa2,ropa3, ropa4);
-localStorage.setItem("stock", JSON.stringify(stock));
-}
 
-setTimeout(()=>{agregarProd(stock)},1000)
+setTimeout(()=>{agregarProd(stock)},500)
 
 let producosStock = document.getElementById("productos");
 function agregarProd(array){
@@ -207,4 +203,57 @@ btnshop.addEventListener("click", ()=>{
 
 
 
+ let cargarProductos= async ()=>{
+   const response = await fetch('stock.json');
+   const product = await response.json();
+   for(let ropa of product){
+    let productoNuevo = new Ropa (ropa.id,ropa.titulo,ropa.descripcion,ropa.precio,ropa.imagen);
+    stock.push(productoNuevo)
+    if(localStorage.getItem("stock")){
+        stock = JSON.parse(localStorage.getItem("stock"));
+    } else {
+        localStorage.setItem("stock", JSON.stringify(product))
+    }
+    
+   }
+   
+}
+cargarProductos();
 
+
+  //Buscador
+  //Capturo el formulario para hacer buscador interno
+
+  const buscador = document.getElementById("buscador");
+  const btnBuscador = document.getElementById("btnBuscar");
+  const paraElBuscador = document.getElementById("paraElBuscador");
+  
+const filtracion = ()=> {
+    producosStock.innerHTML = '';
+    paraElBuscador.innerHTML = '';
+    let filtro = buscador.value.toLowerCase();
+    for(let ropa of stock){
+        let titulo = ropa.titulo.toLowerCase();
+        if(titulo.indexOf(filtro) !== -1){
+            
+            paraElBuscador.innerHTML += `<div id="cuerpoCard${ropa.id}" class="card cardOscuta" style="width: 18rem;">
+            <img src="${ropa.imagen}" class="card-img-top" alt="${ropa.titulo}">
+            <div class="card-body">
+            <h4 class="card-title">${ropa.titulo}</h4>
+            <p class="card-text">${ropa.descripcion}</p>
+            <p class="">Precio: ${ropa.precio} </p>
+            <a id="agregarbtn${ropa.id}" href="#" class="btn btn-dark agregarCarrito">Agregar al carrito</a>
+            </div>
+</div>` 
+        }
+    }
+    if(paraElBuscador.innerHTML === ''){
+        paraElBuscador.innerHTML += `<p class="display-5 ">producto no encontrado</p>` 
+    }
+}
+
+btnBuscador.addEventListener("click", ()=>{
+    filtracion();
+})
+
+buscador.addEventListener("keyup", filtracion)
