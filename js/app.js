@@ -3,12 +3,13 @@ let prodctosAComprar = [];
 
 class Ropa {
 
-    constructor(id, titulo, descripcion, precio, imagen){
+    constructor(id, titulo, descripcion, precio, imagen, cantidad){
         this.id = id,
         this.titulo = titulo,
         this.descripcion = descripcion,
         this.precio = precio,
-        this.imagen = "./img/default.png"
+        this.imagen = "./img/default.png",
+        this.cantidad =0
     }
 
 }
@@ -58,10 +59,25 @@ function agregarProd(array){
         });
     })}
 
+    const cantidadCarrito = document.getElementById("cantidadCarrito");
 
     function agregarAlCarrito(ropa){
+
+        let ropaAgregada = prodctosAComprar.find(function(producto){return producto.id == ropa.id})
+    
+        if(ropaAgregada == undefined){
+        console.log(ropaAgregada);
         prodctosAComprar.push(ropa);
         localStorage.setItem("carrito", JSON.stringify(prodctosAComprar));
+        ropa.cantidad++
+        cantidadCarrito.innerHTML = `<p>${ropa.cantidad}</p>`
+        }else{
+            ropa.cantidad++
+            cantidadCarrito.innerHTML = `<p>${ropa.cantidad}</p>`
+            console.log("Agrergado")
+            sumaDeCompra(prodctosAComprar)
+        }
+
     }
 
     if(localStorage.getItem("carrito")){
@@ -74,7 +90,7 @@ function agregarProd(array){
         let tituloDePrendaAgregada = document.getElementById("tituloPrenda");
         let descripcionDePrendaAgregada = document.getElementById("descripcionPrenda");
         let precioDePrendaAgregada = document.getElementById("precioPrenda");
-        let prendaAgregada = new Ropa (stock.length+1,tituloDePrendaAgregada.value, descripcionDePrendaAgregada.value, parseInt(precioDePrendaAgregada.value), "./img/default.png");
+        let prendaAgregada = new Ropa (stock.length+1,tituloDePrendaAgregada.value, descripcionDePrendaAgregada.value, parseInt(precioDePrendaAgregada.value), "./img/default.png", 0);
         array.push(prendaAgregada);
         localStorage.setItem("stock", JSON.stringify(array));
         tituloDePrendaAgregada.value = "";
@@ -122,6 +138,8 @@ continuarEdicionPrenda.addEventListener("click", ()=>{
     }
 })
 
+
+
 let btnshop = document.getElementById("btnshop");
 let modalBody = document.getElementById("modalBody");
 let precioTotal = document.getElementById("precioTotal");
@@ -129,6 +147,7 @@ let finalizarCompra = document.getElementById("finalizarCompra");
 
 function agregarPrendasEnCarrito(array){
     modalBody.innerHTML = ""
+    
     array.forEach((producto)=>{
         modalBody.innerHTML += `<div id="cardCarrito${producto.id}" class="card cardOscuta" style="width: 18rem;">
         <img src="${producto.imagen}" class="card-img-top" alt="${producto.titulo}">
@@ -136,15 +155,35 @@ function agregarPrendasEnCarrito(array){
           <h5 class="card-title">${producto.titulo}</h5>
           <p class="card-text">${producto.descripcion}</p>
           <p class="card-text">${producto.precio}</p>
+          <p class="card-text">Cantidad: <span id="cantidadCarrito">${producto.cantidad}</span></p>
           <a id="eliminarDelCarrito${producto.id}" href="#" class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>
         </div>
-      </div>`
-
+      </div>`;
+      
+    
+    
+     
+    /*
       let eliminarDelCarrito = document.getElementById(`eliminarDelCarrito${producto.id}`);
       eliminarDelCarrito.addEventListener("click", ()=>{
-        console.log("hola");
+        const item = prodctosAComprar.find((producto)=> producto.id === `eliminarDelCarrito${producto.id}`);
+        const indice = prodctosAComprar.indexOf(item);
+        prodctosAComprar.splice(indice, 1);
+        
+    })*/
     })
+    
+    array.forEach((producto,i)=>{
+        let eliminarDelCarrito = document.getElementById(`eliminarDelCarrito${producto.id}`);
+        eliminarDelCarrito.addEventListener("click",()=>{
+            console.log(`el producto que se lemino es ${producto.titulo}`)
+            array.splice(i, 1)
+            console.log(array)
+            localStorage.setItem("carrito", JSON.stringify(array));
+            agregarPrendasEnCarrito(array)
+        })
     })
+ 
     sumaDeCompra(array)
 }
 
@@ -196,7 +235,9 @@ function terminarCompra(){
 }
 
 btnshop.addEventListener("click", ()=>{
+    
     agregarPrendasEnCarrito(prodctosAComprar)
+    
 });
 
 
@@ -207,7 +248,7 @@ btnshop.addEventListener("click", ()=>{
    const response = await fetch('stock.json');
    const product = await response.json();
    for(let ropa of product){
-    let productoNuevo = new Ropa (ropa.id,ropa.titulo,ropa.descripcion,ropa.precio,ropa.imagen);
+    let productoNuevo = new Ropa (ropa.id,ropa.titulo,ropa.descripcion,ropa.precio,ropa.imagen,0);
     stock.push(productoNuevo)
     if(localStorage.getItem("stock")){
         stock = JSON.parse(localStorage.getItem("stock"));

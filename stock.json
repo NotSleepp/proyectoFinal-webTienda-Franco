@@ -4,27 +4,31 @@
     "titulo": "Remera",
     "descripsion":"remera blanca de la marca adidas",
     "precio":250,
-    "imagen": "./img/default.png"
+    "imagen": "./img/default.png",
+    "cantidad":0
 },
 {
     "id" : 2,
     "titulo": "Remera Negra",
     "descripsion":"remera negra de la marca nike para deporte",
     "precio":1000,
-    "imagen": "./img/default.png"
+    "imagen": "./img/default.png",
+    "cantidad":0
 },
 {
     "id" : 3,
     "titulo": "Pantalon",
     "descripsion":"pantalon jean de clor negro",
     "precio":8000,
-    "imagen": "./img/default.png"
+    "imagen": "./img/default.png",
+    "cantidad":0
 },
 {
     "id" : 4,
     "titulo":"buzo",
     "descripsion": "buzo de clor negro",
     "precio":15000,
-    "imagen": "./img/default.png"
+    "imagen": "./img/default.png",
+    "cantidad":0
 }
 ]
